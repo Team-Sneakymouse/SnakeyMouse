@@ -4,7 +4,7 @@ module.exports = function config(api) {
       [
         "@babel/preset-env",
         api.caller((x) => !x || x.target === "node" || x.target === undefined) ? {
-          targets: { node: "14" },
+          targets: { node: "24" },
           useBuiltIns: "usage",
           corejs: { version: 3, proposals: true },
         } : {},

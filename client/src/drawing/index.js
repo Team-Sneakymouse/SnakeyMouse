@@ -101,23 +101,23 @@ export const drawGUI = (_state) => {
   if (sg.clientState === CLIENT_STATES.PLAYING || sg.clientState === CLIENT_STATES.PAUSED) {
     switch (sg.gameState) {
       case CLIENT_STATES.GAME_WAITING_FOR_PLAYERS:
-      drawWaitingForPlayersGUI(_state);
-      break;
+        drawWaitingForPlayersGUI(_state);
+        break;
       case CLIENT_STATES.GAME_STARTING_SOON:
-      drawStartingSoonGUI(_state);
-      break;
+        drawStartingSoonGUI(_state);
+        break;
       case CLIENT_STATES.GAME_OVER:
-      drawGameOverGUI(_state);
-      break;
+        drawGameOverGUI(_state);
+        break;
       case CLIENT_STATES.GAME_RESETTING:
-      drawResetGUI(_state);
-      break;
+        drawResetGUI(_state);
+        break;
       case CLIENT_STATES.GAME_PLAYING:
       default:
-      drawPlayingGUI(_state);
-      break;
+        drawPlayingGUI(_state);
+        break;
     }
-    
+
     if (sg.controlType === CONTROL_TYPES.TOUCH) {
       sg.touchButtons.forEach(touchButton => touchButton.updateAndDraw(_state))
     }
@@ -130,18 +130,18 @@ export const drawWaitingForPlayersGUI = (_state) => {
   const vpUnit = Math.min(s.viewport.vw, s.viewport.vh);
   drawTextOutline(
     s,
-    "Waiting for Players (min 2)", 
-    s.viewport.width / 2, 
-    4*vpUnit, 
-    `${4*vpUnit}px Arial`, 
-    'rgb(255, 255, 255)', 
-    'rgb(50, 50, 50)', 
+    "Waiting for Players (min 2)",
+    s.viewport.width / 2,
+    4 * vpUnit,
+    `${4 * vpUnit}px Arial`,
+    'rgb(255, 255, 255)',
+    'rgb(50, 50, 50)',
     1
   );
   Object.values(sg.players).forEach((player, i) => {
     if (i > 20) return;
-    drawTextOutline(s, "Sneks in a Lobby", 18*vpUnit, 4*vpUnit, `${4*vpUnit}px Arial`, 'rgb(255, 255, 255)', 'rgb(50, 50, 50)', 1)
-    drawTextOutline(s, player.name, 3*vpUnit, 9*vpUnit+i*3*vpUnit, `${3*vpUnit}px Arial`, 'rgb(255, 255, 255)', 'rgb(50, 50, 50)', 0.5, 'left');
+    drawTextOutline(s, "Sneks in a Lobby", 18 * vpUnit, 4 * vpUnit, `${4 * vpUnit}px Arial`, 'rgb(255, 255, 255)', 'rgb(50, 50, 50)', 1)
+    drawTextOutline(s, player.name, 3 * vpUnit, 9 * vpUnit + i * 3 * vpUnit, `${3 * vpUnit}px Arial`, 'rgb(255, 255, 255)', 'rgb(50, 50, 50)', 0.5, 'left');
   });
 }
 
@@ -151,24 +151,24 @@ export const drawStartingSoonGUI = (_state) => {
   const vpUnit = Math.min(s.viewport.vw, s.viewport.vh);
   drawTextOutline(
     s,
-    "Starting Soon (unless people leave)", 
-    s.viewport.width / 2, 
-    4*vpUnit, 
-    `${4*vpUnit}px Arial`, 
-    'rgb(255, 255, 255)', 
-    'rgb(50, 50, 50)', 
+    "Starting Soon (unless people leave)",
+    s.viewport.width / 2,
+    4 * vpUnit,
+    `${4 * vpUnit}px Arial`,
+    'rgb(255, 255, 255)',
+    'rgb(50, 50, 50)',
     1
   );
   drawProgressBar(
     s,
-    s.viewport.width / 3, 
-    7*vpUnit, 
-    s.viewport.width / 3, 
-    1.5*vpUnit, 
-    'rgba(255, 255, 255, 0.5)', 
-    '#7D5BA6', 
-    sg.gameStateTimer, 
-    0, 
+    s.viewport.width / 3,
+    7 * vpUnit,
+    s.viewport.width / 3,
+    1.5 * vpUnit,
+    'rgba(255, 255, 255, 0.5)',
+    '#7D5BA6',
+    sg.gameStateTimer,
+    0,
     GLOBALS.startTimerLength
   );
 }
@@ -182,44 +182,44 @@ export const drawGameOverGUI = (_state) => {
   c.fillRect(0, 0, s.viewport.width, s.viewport.height);
   drawTextOutline(
     s,
-    "Game Over", 
-    s.viewport.width / 2, 
-    4*vpUnit, 
-    `${5*vpUnit}px Arial`, 
-    'rgb(255, 255, 255)', 
-    'rgb(50, 50, 50)', 
+    "Game Over",
+    s.viewport.width / 2,
+    4 * vpUnit,
+    `${5 * vpUnit}px Arial`,
+    'rgb(255, 255, 255)',
+    'rgb(50, 50, 50)',
     1
   );
   drawProgressBar(
     s,
-    s.viewport.width / 3, 
-    7*vpUnit, 
-    s.viewport.width / 3, 
-    1.5*vpUnit, 
-    'rgba(255, 255, 255, 0.5)', 
-    '#D81159', 
-    sg.gameStateTimer, 
+    s.viewport.width / 3,
+    7 * vpUnit,
+    s.viewport.width / 3,
+    1.5 * vpUnit,
+    'rgba(255, 255, 255, 0.5)',
+    '#D81159',
+    sg.gameStateTimer,
     GLOBALS.gameEndTimerLength,
     0
   );
   drawTextOutline(
     s,
-    "Most Dangerous Noodle:", 
-    s.viewport.width / 2, 
-    s.viewport.height / 2 - 4*vpUnit, 
-    `${6*vpUnit}px Arial`, 
-    'rgb(255, 255, 255)', 
-    'rgb(50, 50, 50)', 
+    "Most Dangerous Noodle:",
+    s.viewport.width / 2,
+    s.viewport.height / 2 - 4 * vpUnit,
+    `${6 * vpUnit}px Arial`,
+    'rgb(255, 255, 255)',
+    'rgb(50, 50, 50)',
     2
   );
   drawTextOutline(
     s,
-    `${sg.scoreboard?.[0]?.[1]} with ${sg.scoreboard?.[0]?.[2]} points!`, 
-    s.viewport.width / 2, 
-    s.viewport.height / 2 + 4*vpUnit, 
-    `${7*vpUnit}px Arial`, 
-    'rgb(255, 255, 255)', 
-    'rgb(50, 50, 50)', 
+    `${sg.scoreboard?.[0]?.[1]} with ${sg.scoreboard?.[0]?.[2]} points!`,
+    s.viewport.width / 2,
+    s.viewport.height / 2 + 4 * vpUnit,
+    `${7 * vpUnit}px Arial`,
+    'rgb(255, 255, 255)',
+    'rgb(50, 50, 50)',
     2
   );
 }
@@ -228,12 +228,12 @@ export const drawResetGUI = (_state) => {
   const vpUnit = Math.min(_state.viewport.vw, _state.viewport.vh);
   drawTextOutline(
     _state,
-    "Reseting...", 
-    _state.viewport.width / 2, 
-    4*vpUnit, 
-    `${4*vpUnit}px Arial`, 
-    'rgb(255, 255, 255)', 
-    'rgb(50, 50, 50)', 
+    "Reseting...",
+    _state.viewport.width / 2,
+    4 * vpUnit,
+    `${4 * vpUnit}px Arial`,
+    'rgb(255, 255, 255)',
+    'rgb(50, 50, 50)',
     1
   );
 }
@@ -242,26 +242,26 @@ export const drawPlayingGUI = (_state) => {
   const s = _state;
   const sg = s.game;
   const vpUnit = Math.min(s.viewport.vw, s.viewport.vh);
-  drawScoreboard(s, 3*vpUnit, 6*vpUnit);
+  drawScoreboard(s, 3 * vpUnit, 6 * vpUnit);
   drawTextOutline(
     s,
-    "Time Left", 
-    s.viewport.width / 2, 
-    4*vpUnit, 
-    `${4*vpUnit}px Arial`, 
-    'rgb(255, 255, 255)', 
-    'rgb(50, 50, 50)', 
+    "Time Left",
+    s.viewport.width / 2,
+    4 * vpUnit,
+    `${4 * vpUnit}px Arial`,
+    'rgb(255, 255, 255)',
+    'rgb(50, 50, 50)',
     1
   );
   drawProgressBar(
     s,
-    s.viewport.width / 3, 
-    6*vpUnit, 
-    s.viewport.width / 3, 
-    1.5*vpUnit, 
-    'rgba(255, 255, 255, 0.5)', 
-    '#55D6BE', 
-    sg.gameStateTimer, 
+    s.viewport.width / 3,
+    6 * vpUnit,
+    s.viewport.width / 3,
+    1.5 * vpUnit,
+    'rgba(255, 255, 255, 0.5)',
+    '#55D6BE',
+    sg.gameStateTimer,
     GLOBALS.roundTimerLength,
     0
   );
@@ -276,9 +276,9 @@ export const drawScoreboard = (_state, x, y) => {
   c.save();
   scoreboard.forEach((playerScore, i) => {
     if (i > 9) return;
-    drawTextOutline(s, "Sneakiest Sneks", x + 15*vpUnit, y-1.5*vpUnit, `${4*vpUnit}px Arial`, 'rgb(255, 255, 255)', 'rgb(50, 50, 50)', 1)
-    drawTextOutline(s, playerScore[2], x, y+3*vpUnit+i*3*vpUnit, `${3*vpUnit}px Arial`, 'rgb(255, 255, 255)', 'rgb(50, 50, 50)', 0.5, 'left');
-    drawTextOutline(s, playerScore[1], x+9*vpUnit, y+3*vpUnit+i*3*vpUnit, `${3*vpUnit}px Arial`, 'rgb(255, 255, 255)', 'rgb(50, 50, 50)', 0.5, 'left');
+    drawTextOutline(s, "Sneakiest Sneks", x + 15 * vpUnit, y - 1.5 * vpUnit, `${4 * vpUnit}px Arial`, 'rgb(255, 255, 255)', 'rgb(50, 50, 50)', 1)
+    drawTextOutline(s, playerScore[2], x, y + 3 * vpUnit + i * 3 * vpUnit, `${3 * vpUnit}px Arial`, 'rgb(255, 255, 255)', 'rgb(50, 50, 50)', 0.5, 'left');
+    drawTextOutline(s, playerScore[1], x + 9 * vpUnit, y + 3 * vpUnit + i * 3 * vpUnit, `${3 * vpUnit}px Arial`, 'rgb(255, 255, 255)', 'rgb(50, 50, 50)', 0.5, 'left');
   });
   c.restore();
 }
@@ -311,14 +311,14 @@ export const drawText = (_state, string, x, y, css, color, textAlign = "center",
 
 export const drawShadowText = (
   _state,
-  string, 
-  x, 
-  y, 
-  css, 
-  shadowColor, 
-  textColor, 
-  offsetX = 5, 
-  offsetY = 5, 
+  string,
+  x,
+  y,
+  css,
+  shadowColor,
+  textColor,
+  offsetX = 5,
+  offsetY = 5,
   textAlign = "center",
   textBaseline = "middle"
 ) => {
@@ -330,14 +330,14 @@ export const drawShadowText = (
 
 export const drawTextOutline = (
   _state,
-  string, 
-  x, 
-  y, 
-  css, 
-  color, 
-  outlineColor, 
-  lineWidth = 3, 
-  textAlign = "center", 
+  string,
+  x,
+  y,
+  css,
+  color,
+  outlineColor,
+  lineWidth = 3,
+  textAlign = "center",
   textBaseline = "middle"
 ) => {
   let c = _state.ctx;
@@ -377,27 +377,20 @@ export const randomPalletteColor = () => {
     '#D81159',
     '#606C38'
   ];
-  return allColors[utils.randomInt(0, allColors.length-1)]
+  return allColors[utils.randomInt(0, allColors.length - 1)]
 }
 
 export const allPlayerSpriteNames = [
-  ["beepatronPlayer", "Beepatron"],
   ["cheetohPlayer", "Cheetoh"],
   ["dangerRatPlayer", "Danger Rat"],
   ["dangerRatColonyPlayer", "Oops All Rats"],
-  ["goatPlayer", "Geep (goat sheep)"],
-  ["illidanPlayer", "Illidan"],
   ["jimmyPlayer", "Jimmy"],
   ["koboldPlayer", "Kobold"],
   ["monicaPlayer", "Monica"],
-  ["moogliPlayer", "Moogli"],
-  ["owlPlayer", "Dorky Owl"],
-  ["rormanPlayer", "Rat King Rorman"],
-  ["sleepylilturtlePlayer", "Sleepy Turtle"],
   ["snakeyMousePlayer", "Snakey Mouse"],
   ["vampireMonicaPlayer", "Vampire Monica"],
   ["vampireMousePlayer", "Vampire Mouse"]
 ];
 export const randomPlayerSprite = () => {
-  return allPlayerSpriteNames[utils.randomInt(0, allPlayerSpriteNames.length-1)][0];
+  return allPlayerSpriteNames[utils.randomInt(0, allPlayerSpriteNames.length - 1)][0];
 }
